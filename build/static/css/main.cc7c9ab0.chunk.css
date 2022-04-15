@@ -1,0 +1,2 @@
+.App{text-align:center}.App,.grid{font-family:sans-serif}.grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;grid-auto-rows:minmax(-webkit-min-content,-webkit-max-content);grid-auto-rows:minmax(min-content,max-content)}.main{grid-column:2/6;margin-left:.5rem}.main,.sidebar{border:.5px solid grey;border-radius:5px}ol.list{list-style-type:none;font-size:1rem}ol.list>li{font-weight:700;color:purple;padding-bottom:1rem}
+/*# sourceMappingURL=main.cc7c9ab0.chunk.css.map */

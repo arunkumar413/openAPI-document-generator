@@ -3,7 +3,7 @@ import openapi from "./openapi";
 import { useEffect } from "react";
 export default function App() {
   useEffect(function () {
-    // console.log(openapi.paths);
+    console.log(openapi);
   }, []);
 
   let paths = Object.keys(openapi.paths);
@@ -19,12 +19,39 @@ export default function App() {
 
   // console.log(openapi.paths["/pet"].put.summary);
 
+  function getReferenceObject(ref) {
+    console.log(ref);
+    debugger;
+
+    let refArray = ref.split('/')
+    let refItemIndex = refArray.length - 1
+
+    return JSON.parse(openapi.components.refSplit[refItemIndex])
+
+
+  }
+
+
+  function isSchemaNull(path) {
+    return openapi.paths[path].put.requestBody.content["application/json"].schema === null ? true : false
+
+  }
+
+
+
+
   const pathMethodElements = paths.map(function (path, index) {
     if (openapi.paths[path].put != null) {
-      console.log(openapi.paths[path]);
+      // console.log(openapi.paths[path]);
       return (
         <div className="pathMethod" key={index.toString()}>
           <h5> {openapi.paths[path].put.summary} </h5>
+          <p> {
+
+            isSchemaNull(path) ? getReferenceObject(openapi.paths[path].put.requestBody.content["application/json"].schema["$ref"]) : ""
+
+          }
+          </p>
         </div>
       );
     } else if (openapi.paths[path].get != null) {
@@ -53,7 +80,6 @@ export default function App() {
   return (
     <div className="grid">
       <div className="sidebar">
-        <h5> Paths </h5>
         <ol className="list">{pathElements}</ol>
       </div>
       <div className="main">
