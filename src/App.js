@@ -17,23 +17,30 @@ export default function App() {
     );
   });
 
-  // console.log(openapi.paths["/pet"].put.summary);
 
   function getReferenceObject(ref) {
     console.log(ref);
-    debugger;
-
     let refArray = ref.split('/')
     let refItemIndex = refArray.length - 1
-
-    return JSON.parse(openapi.components.refSplit[refItemIndex])
-
-
+    let key = refArray[refItemIndex]
+    return JSON.stringify(openapi.components[key])
   }
 
 
-  function isSchemaNull(path) {
-    return openapi.paths[path].put.requestBody.content["application/json"].schema === null ? true : false
+  function getSchema(path, method) {
+    debugger
+    let schemaType = typeof (openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
+    if (schemaType === 'string') {
+      return getReferenceObject(openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
+    }
+    else if (schemaType === 'object') {
+      return JSON.stringify(openapi.paths[path][method].requestBody.content["application/json"].schema)
+    }
+
+    else {
+      return null
+    }
+
 
   }
 
@@ -48,8 +55,7 @@ export default function App() {
           <h5> {openapi.paths[path].put.summary} </h5>
           <p> {
 
-            isSchemaNull(path) ? getReferenceObject(openapi.paths[path].put.requestBody.content["application/json"].schema["$ref"]) : ""
-
+            getSchema(path, "put")
           }
           </p>
         </div>
@@ -58,6 +64,7 @@ export default function App() {
       return (
         <div className="pathMethod" key={index.toString()}>
           <h5> {openapi.paths[path].get.summary} </h5>
+          <p> Method:  Get </p>
         </div>
       );
     } else if (openapi.paths[path].post != null) {
