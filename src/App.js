@@ -28,7 +28,6 @@ export default function App() {
 
 
   function getSchema(path, method) {
-    debugger
     let schemaType = typeof (openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
     if (schemaType === 'string') {
       return getReferenceObject(openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
@@ -45,44 +44,69 @@ export default function App() {
   }
 
 
+  function getMehtodElements(path) {
+    let methods = Object.keys(openapi.paths[path])
+
+    let elements = methods.map(function (method, index) {
+
+      let result = getSchema(path, method)
+
+      return (<div key={index.toString()}>  <h4>  methods </h4> <h6>   {method}</h6> {result} </div>)
+    })
+
+    return elements
+  }
 
 
-  const pathMethodElements = paths.map(function (path, index) {
-    if (openapi.paths[path].put != null) {
-      // console.log(openapi.paths[path]);
-      return (
-        <div className="pathMethod" key={index.toString()}>
-          <h5> {openapi.paths[path].put.summary} </h5>
-          <p> {
+  const pathItems = paths.map(function (path, index) {
+    return (<div key={index.toString()}>  Paths
+      <h3> Paths  </h3>
+      <h5>  {path} </h5>
+      {getMehtodElements(path)}
+    </div>
+    )
 
-            getSchema(path, "put")
-          }
-          </p>
-        </div>
-      );
-    } else if (openapi.paths[path].get != null) {
-      return (
-        <div className="pathMethod" key={index.toString()}>
-          <h5> {openapi.paths[path].get.summary} </h5>
-          <p> Method:  Get </p>
-        </div>
-      );
-    } else if (openapi.paths[path].post != null) {
-      return (
-        <div className="pathMethod" key={index.toString()}>
-          <h5> {openapi.paths[path].post.summary} </h5>
-        </div>
-      );
-    } else if (openapi.paths[path].delete != null) {
-      return (
-        <div className="pathMethod" key={index.toString()}>
-          <h5> {openapi.paths[path].delete.summary} </h5>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  });
+  })
+
+
+
+
+  // const pathMethodElements = paths.map(function (path, index) {
+  //   if (openapi.paths[path].put != null) {
+  //     // console.log(openapi.paths[path]);
+  //     return (
+  //       <div className="pathMethod" key={index.toString()}>
+  //         <h5> {openapi.paths[path].put.summary} </h5>
+  //         <p> {
+
+  //           getSchema(path, "put")
+  //         }
+  //         </p>
+  //       </div>
+  //     );
+  //   } else if (openapi.paths[path].get != null) {
+  //     return (
+  //       <div className="pathMethod" key={index.toString()}>
+  //         <h5> {openapi.paths[path].get.summary} </h5>
+  //         <p> Method:  Get </p>
+  //       </div>
+  //     );
+  //   } else if (openapi.paths[path].post != null) {
+  //     return (
+  //       <div className="pathMethod" key={index.toString()}>
+  //         <h5> {openapi.paths[path].post.summary} </h5>
+  //       </div>
+  //     );
+  //   } else if (openapi.paths[path].delete != null) {
+  //     return (
+  //       <div className="pathMethod" key={index.toString()}>
+  //         <h5> {openapi.paths[path].delete.summary} </h5>
+  //       </div>
+  //     );
+  //   } else {
+  //     return null;
+  //   }
+  // });
 
   return (
     <div className="grid">
@@ -93,7 +117,7 @@ export default function App() {
         {" "}
         <h1>{openapi.info.title}</h1>
         <p> {openapi.info.description} </p>
-        {pathMethodElements}
+        {pathItems}
       </div>
     </div>
   );
