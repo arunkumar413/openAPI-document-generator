@@ -4,7 +4,6 @@ let getPet = {
     method: 'get',
     queryParams: [{ id: 33434, name: 'Tommy' }],
     requestInfo: [
-
         {
             contentType: 'application/json', schema: { name: 'username', id: 34343 },
             responseType: 'application/json', schema: { name: 'username', id: 34343 },
