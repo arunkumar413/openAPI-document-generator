@@ -26,19 +26,46 @@ export default function App() {
     return JSON.stringify(openapi.components[key])
   }
 
+  function checkContetExist(content) {
+
+
+
+
+  }
+
+
+
 
   function getSchema(path, method) {
-    let schemaType = typeof (openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
-    if (schemaType === 'string') {
-      return getReferenceObject(openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
-    }
-    else if (schemaType === 'object') {
-      return JSON.stringify(openapi.paths[path][method].requestBody.content["application/json"].schema)
+    let isRequestBodyExist = "requestBody" in openapi.paths[path][method]
+    let contentExists = 'content' in openapi.paths[path][method].requestBody.
+
+
+
+    if (isRequestBodyExist === true && jsonExist) {
+      checkContetExist(openapi.paths[path][method].requestBody.content)
+      let schemaType = typeof (openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
+      if (schemaType === 'string') {
+        return getReferenceObject(openapi.paths[path][method].requestBody.content["application/json"].schema["$ref"])
+      }
+      else if (schemaType === 'object' && jsonExist) {
+        return JSON.stringify(openapi.paths[path][method].requestBody.content["application/json"].schema)
+      }
+
+      else {
+        return null
+      }
+
     }
 
     else {
+
       return null
     }
+
+
+
+
 
 
   }
