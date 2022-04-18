@@ -20,8 +20,6 @@ export function Document() {
 
   function getResponseInfo(pathIndex) {
     let items = API[pathIndex].requestInfo.map(function (item, index) {
-      debugger;
-      console.log(item);
       return (
         <div key={index.toString()} className="response-body">
           contenty type :{item.responseType}
@@ -34,22 +32,43 @@ export function Document() {
     return items;
   }
 
-  const paths = API.map(function (item, index) {
-    console.log(item);
+  function getResponseCodes(pathIndex) {
+    let items = API[pathIndex].requestInfo.map(function (item, index) {
+      console.log(item.responseCodes);
 
+      return (
+        <div key={index.toString()} className="response-codes">
+          <div>
+            {" "}
+            {item.responseCodes.map(function (code, index2) {
+              return (
+                <div key={index2.toString()} className="response-code">
+                  {" "}
+                  <p className="code"> {code.code} </p>{" "}
+                  <p className="code-description"> {code.description} </p>{" "}
+                </div>
+              );
+            })}{" "}
+          </div>
+        </div>
+      );
+    });
+    return items;
+  }
+
+  const paths = API.map(function (item, index) {
     return (
       <div key={index.toString()} className="resource">
         <h3 clas="tag"> {item.tags[0]} </h3>
         <p>
           Method:{" "}
           <span className={item.method + "-method"}>
-            
             {" "}
             {item.method.toUpperCase()}{" "}
           </span>{" "}
           <span className="path">
-            
             {" "}
+            Path:
             {item.path}
           </span>{" "}
         </p>
@@ -61,6 +80,8 @@ export function Document() {
         {getRequestInfo(index)}
         <h4> Response Info </h4>
         {getResponseInfo(index)}
+        <h4> Response codes </h4>
+        {getResponseCodes(index)}
       </div>
     );
   });
