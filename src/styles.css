@@ -33,3 +33,32 @@ ol.list > li {
   color: purple;
   padding-bottom: 1rem;
 }
+
+.resource {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.get-method {
+  background-color: purple;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.post-method{
+  background-color: green;
+  color: white;
+  padding: 0.2rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.path{}dfdfdfddf
+
+
+
+
