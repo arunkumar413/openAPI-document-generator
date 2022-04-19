@@ -56,25 +56,48 @@ export function Document() {
     return items;
   }
 
+
+  function getQueryParams(pathIndex) {
+
+    let items = Object.keys(API[pathIndex].queryParams).map(function (item, index) {
+
+      return (
+
+        <div key={index.toString()} className="query-params">
+          <div className="query"> {item}  </div>
+          <div className="param"> {API[pathIndex].queryParams[item]}  </div>
+        </div>)
+
+
+    })
+
+
+    return items
+  }
+
   const paths = API.map(function (item, index) {
     return (
       <div key={index.toString()} className="resource">
-        <h3 clas="tag"> {item.tags[0]} </h3>
-        <p>
-          Method:{" "}
-          <span className={item.method + "-method"}>
-            {" "}
-            {item.method.toUpperCase()}{" "}
-          </span>{" "}
+        <div className="resource-header">
+          <h2 clas="tag"> {item.tags[0]} </h2>
+          <p>
+            Method:{" "}
+            <span className={item.method + "-method"}>
+              {" "}
+              {item.method.toUpperCase()}{" "}
+            </span>{" "}
+
+          </p>
           <span className="path">
             {" "}
             Path:
             {item.path}
           </span>{" "}
-        </p>
-        <div className="query-params">
+        </div>
+        <div className="query-params-container">
           <h4> Query Paramerters </h4>
-          {JSON.stringify(item.queryParams)}
+          {getQueryParams(index)}
+          {/* {JSON.stringify(item.queryParams)} */}
         </div>
         <div className="request-body">
           <h4> Request body </h4>
@@ -99,7 +122,6 @@ export function Document() {
 
   return (
     <div>
-      <h3>Document</h3>
       {paths}
     </div>
   );

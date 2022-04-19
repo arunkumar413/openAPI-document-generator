@@ -2,7 +2,7 @@ let getPet = {
   path: "/pet",
   method: "get",
   tags: ["Get pet info"],
-  queryParams: [{ id: 33434, name: "Tommy" }],
+  queryParams: { id: 33434, name: "Tommy" },
   requestInfo: [
     {
       requestType: "application/json",
@@ -32,7 +32,7 @@ let postPet = {
   method: "post",
   tags: ["Post pet info"],
 
-  queryParams: [{ id: 33434, name: "Tommy" }],
+  queryParams: { id: 33434, name: "Tommy" },
   requestInfo: [
     {
       requestType: "application/json",
