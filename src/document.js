@@ -73,15 +73,26 @@ export function Document() {
           </span>{" "}
         </p>
         <div className="query-params">
-          <p> Query Paramerters </p>
+          <h4> Query Paramerters </h4>
           {JSON.stringify(item.queryParams)}
         </div>
-        <h4> Request body </h4>
-        {getRequestInfo(index)}
-        <h4> Response Info </h4>
-        {getResponseInfo(index)}
-        <h4> Response codes </h4>
-        {getResponseCodes(index)}
+        <div className="request-body">
+          <h4> Request body </h4>
+          {getRequestInfo(index)}
+        </div>
+        <div className="response-info">
+          <h4> Response Info </h4>
+          {getResponseInfo(index)}
+        </div>
+        <div className="response-code-container">
+          <h4> Response codes </h4>
+          <div className="response-code">
+            {" "}
+            <p className="code"> Code </p>{" "}
+            <p className="code-description"> Description </p>{" "}
+          </div>
+          {getResponseCodes(index)}
+        </div>
       </div>
     );
   });
