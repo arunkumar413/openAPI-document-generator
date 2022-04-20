@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { API } from "./API";
 
 export function Document() {
@@ -63,10 +63,10 @@ export function Document() {
 
       return (
 
-        <div key={index.toString()} className="query-params">
-          <div className="query"> {item}  </div>
-          <div className="param"> {API[pathIndex].queryParams[item]}  </div>
-        </div>)
+        <React.Fragment key={index.toString()} >
+          <p className="query"> {item}  </p>
+          <p className="param"> {API[pathIndex].queryParams[item]}  </p>
+        </React.Fragment>)
 
 
     })
@@ -94,8 +94,10 @@ export function Document() {
             {item.path}
           </span>{" "}
         </div>
+        <h4> Query Paramerters </h4>
         <div className="query-params-container">
-          <h4> Query Paramerters </h4>
+          <p className="query"> Parameter  </p>
+          <p className="param"> Value  </p>
           {getQueryParams(index)}
           {/* {JSON.stringify(item.queryParams)} */}
         </div>
