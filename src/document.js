@@ -79,7 +79,7 @@ export function Document() {
     return (
       <div key={index.toString()} className="resource">
         <div className="resource-header">
-          <h2 clas="tag"> {item.tags[0]} </h2>
+          <h2 clas="tag"> {item.tags[0]}  </h2>
           <p>
             Method:{" "}
             <span className={item.method + "-method"}>

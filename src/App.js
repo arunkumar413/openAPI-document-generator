@@ -2,24 +2,25 @@ import "./styles.css";
 import openapi from "./openapi";
 import { useEffect } from "react";
 import { Document } from "./document";
+import { API } from "./API";
 export default function App() {
-  useEffect(function () {}, []);
+  useEffect(function () { }, []);
 
   let paths = Object.keys(openapi.paths);
 
-  const pathElements = paths.map(function (path, index) {
+  const pathElements = API.map(function (item, index) {
     return (
-      <li key={index.toString()} className="sidebarItem">
+      <a href="" key={index.toString()} className="sidebarItem">
         {" "}
-        {path}{" "}
-      </li>
+        {item.tags[0]}
+      </a>
     );
   });
 
   return (
     <div className="grid">
       <div className="sidebar">
-        <ol className="list">{pathElements}</ol>
+        {pathElements}
       </div>
       <div className="main">
         {" "}
