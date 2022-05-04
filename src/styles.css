@@ -134,12 +134,12 @@
   border-bottom: solid 0.5px gray;
 }
 
-sup {
+/* sup {
   background-color: purple;
   color: whitesmoke;
   padding: 0.5rem;
   border-radius: 10px;
-}
+} */
 
 a {
   text-decoration: none;
@@ -150,12 +150,18 @@ a {
   padding: 1rem;
   text-align: center;
   font-weight: bold;
-  color: purple;
-  width:90% ;
+  /* color: purple; */
+  width: 90%;
   font-size: large;
 }
 
 .sidebarItem:hover {
   background-color: beige;
   border-radius: 10px;
+}
+
+.sidebarItem>sup {
+  font-size: 0.8rem;
+  color: black;
+  background-color: none;
 }

@@ -13,6 +13,7 @@ export default function App() {
       <a href="" key={index.toString()} className="sidebarItem">
         {" "}
         {item.tags[0]}
+        <sup className={item.method +"-method-sup"}> {item.method} </sup>
       </a>
     );
   });
